@@ -1,0 +1,27 @@
+<?php
+
+session_start();
+include("conexion.php");
+
+$usuario = $_POST['usuario'];
+$clave = $_POST['clave'];
+
+$sql = "SELECT * FROM usuarios
+WHERE usuario='$usuario'
+AND clave='$clave'";
+
+$resultado = $conn->query($sql);
+
+if($resultado->num_rows > 0){
+
+    $_SESSION['usuario']=$usuario;
+
+    header("Location: inicio.php");
+
+}else{
+
+    echo "Usuario o contraseña incorrectos";
+
+}
+
+?>
